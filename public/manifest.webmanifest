@@ -1,0 +1,17 @@
+{
+  "name": "Takip",
+  "short_name": "Takip",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#eef3eb",
+  "theme_color": "#1f6a41",
+  "lang": "tr",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

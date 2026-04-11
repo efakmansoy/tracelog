@@ -1,0 +1,40 @@
+
+:root {
+  --bg: #121418;
+  --surface: #1e2026;
+  --surface-hover: #262931;
+  --surface-bright: #30333d;
+  --border: #333842;
+  --border-focus: #5c7cfa;
+  --text: #e2e8f0;
+  --text-muted: #a0aec0;
+  --text-inverse: #ffffff;
+  --accent: #5c7cfa;
+  --accent-hover: #4c6ef5;
+  
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--text);
+  background: var(--bg);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100vh;
+}
+
+body {
+  letter-spacing: -0.01em;
+}
