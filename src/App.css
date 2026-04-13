@@ -141,7 +141,7 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-  max-width: 900px;
+  max-width: 1080px;
   margin: 0 auto;
   width: 100%;
 }
@@ -193,61 +193,49 @@
 .collapsible-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0;
+  transform: translateY(-8px);
 }
 
 .collapsible-panel.is-open .collapsible-content {
-  max-height: 2000px;
+  max-height: 2500px;
   opacity: 1;
+  transform: translateY(0);
+  padding-bottom: 8px;
 }
 
-.panel-heading h2 {
-  margin: 0;
-  color: var(--text-inverse);
-  font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-.panel-heading-tight {
-  margin-bottom: 14px;
-  border-bottom: none;
-}
-
-.list-controls {
+.panel-heading {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s ease;
 }
 
-.filter-tabs {
-  display: inline-flex;
-  gap: 8px;
-  flex-wrap: wrap;
+.collapsible-panel .panel-heading {
+  margin-bottom: 0;
+  border-bottom: none;
+  padding: 12px 16px;
+  margin: -32px -32px 0;
+  border-radius: 12px;
 }
 
-.filter-tab {
-  padding: 8px 12px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--bg);
-  color: var(--text);
-  box-shadow: none;
+.collapsible-panel.is-open .panel-heading {
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-radius: 12px 12px 0 0;
 }
 
-.filter-tab:hover {
+.collapsible-panel .panel-heading:hover {
   background: var(--surface-hover);
 }
 
-.filter-tab.is-active {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: white;
-}
-
-.inline-filter {
+.collapse-icon {
   min-width: 180px;
 }
 
@@ -293,6 +281,14 @@
   font-weight: 500;
 }
 
+.dual-grid,
+.profile-grid,
+.settings-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
 .stage-row {
   display: grid;
   grid-template-columns: 1fr 130px 1fr;
@@ -319,10 +315,32 @@ textarea {
 
 input[type="date"] {
   color: var(--text-muted);
+  background: var(--bg);
+}
+
+select {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 16px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text-inverse);
 }
 
 input[type="date"].has-value,
 input[type="date"]:focus {
+  color: var(--text-inverse);
+  background: var(--surface-hover);
+}
+
+input[type="date"].is-empty::-webkit-datetime-edit,
+input[type="date"].is-empty::-webkit-date-and-time-value {
+  color: var(--text-muted);
+}
+
+input[type="date"].has-value::-webkit-datetime-edit,
+input[type="date"].has-value::-webkit-date-and-time-value {
   color: var(--text-inverse);
 }
 
@@ -408,6 +426,7 @@ button:disabled {
 }
 
 .timeline-card {
+  position: relative;
   padding: 24px;
   display: flex;
   justify-content: space-between;
@@ -415,6 +434,11 @@ button:disabled {
   gap: 20px;
   background: var(--surface-hover);
   border: 1px solid var(--border);
+}
+
+.timeline-main {
+  flex: 1;
+  min-width: 0;
 }
 
 .timeline-card::before {
@@ -591,6 +615,16 @@ button:disabled {
   background: var(--surface-hover);
 }
 
+.icon-action-danger {
+  color: #ef7474;
+  border-color: rgba(239, 68, 68, 0.24);
+}
+
+.icon-action-danger:hover {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
 .icon-action svg {
   width: 18px;
   height: 18px;
@@ -625,6 +659,131 @@ button:disabled {
   font-size: 0.95rem;
   line-height: 1.5;
   color: var(--text-muted);
+}
+
+.status-banner,
+.series-manager-card,
+.calendar-day,
+.settings-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.status-banner {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mobile-quick-nav {
+  display: none;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mobile-quick-nav a {
+  text-decoration: none;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 12px;
+}
+
+.compact-actions {
+  flex-wrap: wrap;
+}
+
+.calendar-list,
+.series-manager-list,
+.stage-order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.calendar-day {
+  padding: 18px;
+}
+
+.calendar-day header,
+.series-manager-header,
+.stage-order-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.calendar-day-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.calendar-pill,
+.stage-editor-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.calendar-pill {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 180px;
+}
+
+.stage-editor-card,
+.series-manager-card {
+  padding: 16px;
+}
+
+.stage-order-item {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.stage-order-item span,
+.calendar-pill small,
+.validation-list p {
+  color: var(--text-muted);
+  font-size: 0.86rem;
+}
+
+.stage-index {
+  min-width: 28px;
+  text-align: center;
+}
+
+.recurrence-tag {
+  color: #74c0fc;
+  border-color: rgba(116, 192, 252, 0.22);
+  background: rgba(116, 192, 252, 0.08);
+}
+
+.queued-tag {
+  color: #f59f00;
+  border-color: rgba(245, 159, 0, 0.24);
+  background: rgba(245, 159, 0, 0.08);
+}
+
+.validation-list {
+  padding: 12px 14px;
+  border: 1px solid rgba(239, 68, 68, 0.24);
+  border-radius: 8px;
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.validation-list p {
+  margin: 0;
 }
 
 .empty-state {
@@ -671,7 +830,7 @@ button:disabled {
   .content {
     padding: 24px;
   }
-  .form-panel, .stage-row {
+  .form-panel, .stage-row, .dual-grid, .profile-grid, .settings-row {
     grid-template-columns: 1fr;
   }
   .timeline-card {
@@ -687,5 +846,8 @@ button:disabled {
   .card-actions {
     width: 100%;
     justify-content: flex-end;
+  }
+  .mobile-quick-nav {
+    display: flex;
   }
 }

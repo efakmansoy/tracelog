@@ -11,6 +11,9 @@ const entries: AppEntry[] = [
     status: 'pending',
     type: 'task',
     seriesId: null,
+    recurrence: 'none',
+    sortOrder: 1,
+    syncState: 'synced',
     createdAt: '2026-01-01T09:00:00.000Z',
   },
   {
@@ -21,6 +24,9 @@ const entries: AppEntry[] = [
     status: 'pending',
     type: 'task',
     seriesId: null,
+    recurrence: 'none',
+    sortOrder: 0,
+    syncState: 'synced',
     createdAt: '2026-01-01T09:00:00.000Z',
   },
   {
@@ -31,6 +37,9 @@ const entries: AppEntry[] = [
     status: 'pending',
     type: 'stage',
     seriesId: 'series-1',
+    recurrence: 'none',
+    sortOrder: 0,
+    syncState: 'synced',
     createdAt: '2026-01-01T09:00:00.000Z',
   },
   {
@@ -41,6 +50,9 @@ const entries: AppEntry[] = [
     status: 'completed',
     type: 'task',
     seriesId: null,
+    recurrence: 'none',
+    sortOrder: 2,
+    syncState: 'synced',
     createdAt: '2026-01-01T09:00:00.000Z',
   },
 ]

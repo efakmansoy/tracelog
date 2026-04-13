@@ -5,6 +5,7 @@ create table if not exists public.profiles (
   timezone text not null default 'Europe/Istanbul',
   daily_summary_time text not null default '09:00',
   push_enabled boolean not null default false,
+  display_name text not null default '',
   last_summary_sent_local_date date
 );
 
@@ -27,8 +28,27 @@ create table if not exists public.entries (
   scheduled_date date not null,
   status text not null default 'pending' check (status in ('pending', 'completed', 'canceled')),
   type text not null check (type in ('task', 'stage')),
+  recurrence text not null default 'none' check (recurrence in ('none', 'daily', 'weekly', 'monthly')),
+  sort_order integer not null default 0,
   created_at timestamptz not null default now()
 );
+
+alter table public.profiles add column if not exists display_name text not null default '';
+alter table public.entries add column if not exists recurrence text not null default 'none';
+alter table public.entries add column if not exists sort_order integer not null default 0;
+
+update public.entries
+set recurrence = 'none'
+where recurrence is null;
+
+update public.entries
+set sort_order = 0
+where sort_order is null;
+
+alter table public.entries drop constraint if exists entries_recurrence_check;
+alter table public.entries
+add constraint entries_recurrence_check
+check (recurrence in ('none', 'daily', 'weekly', 'monthly'));
 
 create table if not exists public.push_subscriptions (
   id uuid primary key default gen_random_uuid(),
@@ -45,6 +65,11 @@ alter table public.profiles enable row level security;
 alter table public.series enable row level security;
 alter table public.entries enable row level security;
 alter table public.push_subscriptions enable row level security;
+
+drop policy if exists "profiles own rows" on public.profiles;
+drop policy if exists "series own rows" on public.series;
+drop policy if exists "entries own rows" on public.entries;
+drop policy if exists "subscriptions own rows" on public.push_subscriptions;
 
 create policy "profiles own rows" on public.profiles
 for all using (auth.uid() = user_id) with check (auth.uid() = user_id);

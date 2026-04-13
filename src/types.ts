@@ -1,4 +1,7 @@
 export type EntryStatus = 'pending' | 'completed' | 'canceled'
+export type EntryType = 'task' | 'stage'
+export type EntryRecurrence = 'none' | 'daily' | 'weekly' | 'monthly'
+export type SyncState = 'synced' | 'queued'
 
 export interface AppSeries {
   id: string
@@ -15,8 +18,11 @@ export interface AppEntry {
   notes: string
   scheduledDate: string
   status: EntryStatus
-  type: 'task' | 'stage'
+  type: EntryType
   seriesId: string | null
+  recurrence: EntryRecurrence
+  sortOrder: number
+  syncState: SyncState
   createdAt: string
 }
 
@@ -24,15 +30,17 @@ export interface DashboardSettings {
   dailySummaryTime: string
   pushEnabled: boolean
   timezone: string
+  displayName: string
 }
 
 export interface EntryDraft {
   title: string
   scheduledDate: string
   notes: string
+  recurrence: EntryRecurrence
 }
 
-export interface SeriesStageDraft extends EntryDraft {}
+export type SeriesStageDraft = EntryDraft
 
 export interface SeriesDraft {
   title: string

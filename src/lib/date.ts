@@ -21,6 +21,9 @@ export function getRelativeTone(dateString: string) {
 export function sortEntriesByDate(entries: AppEntry[]) {
   return [...entries].sort((left, right) => {
     if (left.scheduledDate === right.scheduledDate) {
+      if (left.sortOrder !== right.sortOrder) {
+        return left.sortOrder - right.sortOrder
+      }
       return left.createdAt.localeCompare(right.createdAt)
     }
 

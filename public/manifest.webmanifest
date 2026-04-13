@@ -1,6 +1,6 @@
 {
-  "name": "Takip",
-  "short_name": "Takip",
+  "name": "TraceLog",
+  "short_name": "TraceLog",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#eef3eb",

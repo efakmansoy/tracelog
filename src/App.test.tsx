@@ -16,6 +16,9 @@ const entry: AppEntry = {
   status: 'pending',
   type: 'task',
   seriesId: 'series-1',
+  recurrence: 'none',
+  sortOrder: 0,
+  syncState: 'synced',
   createdAt: '2026-01-01T10:00:00.000Z',
 }
 
@@ -35,6 +38,8 @@ describe('TimelineCard', () => {
         entry={entry}
         series={series}
         onStatusChange={vi.fn().mockResolvedValue(undefined)}
+        onUpdate={vi.fn().mockResolvedValue(undefined)}
+        onDelete={vi.fn().mockResolvedValue(undefined)}
       />,
     )
 
@@ -51,6 +56,8 @@ describe('TimelineCard', () => {
         entry={entry}
         series={null}
         onStatusChange={onStatusChange}
+        onUpdate={vi.fn().mockResolvedValue(undefined)}
+        onDelete={vi.fn().mockResolvedValue(undefined)}
       />,
     )
 
