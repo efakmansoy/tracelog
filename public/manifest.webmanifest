@@ -1,14 +1,14 @@
 {
   "name": "TraceLog",
   "short_name": "TraceLog",
-  "start_url": "/",
+  "start_url": "/tracelog/",
   "display": "standalone",
   "background_color": "#eef3eb",
   "theme_color": "#1f6a41",
   "lang": "tr",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "/tracelog/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
