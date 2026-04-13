@@ -4,6 +4,8 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  // GitHub repository ismi. Repo adınız "takip" değilse, bunu kendi repo adınızla (/repo-adi/) değiştirin.
+  base: '/takip/',
   build: {
     rollupOptions: {
       output: {
