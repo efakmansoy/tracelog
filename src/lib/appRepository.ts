@@ -215,6 +215,23 @@ export function watchAuth(onChange: () => void) {
   return () => data.subscription.unsubscribe()
 }
 
+export async function signInWithGoogle() {
+  if (!supabase) {
+    throw new Error('Supabase ayarlanmadığı için Google ile giriş yapılamıyor.')
+  }
+
+  const redirectUrl = window.location.origin + import.meta.env.BASE_URL
+
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: redirectUrl,
+    },
+  })
+
+  if (error) throw error
+}
+
 export async function signInWithMagicLink(email: string) {
   if (!supabase) {
     throw new Error('Supabase ayarlanmadığı için magic link kullanılamıyor.')

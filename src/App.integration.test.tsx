@@ -48,6 +48,7 @@ const repositoryMock = vi.hoisted(() => ({
   getBootstrapData: vi.fn(),
   getPushSupport: vi.fn(() => ({ supported: true, reason: '' })),
   reorderSeriesStages: vi.fn().mockResolvedValue(undefined),
+  signInWithGoogle: vi.fn().mockResolvedValue(undefined),
   signInWithMagicLink: vi.fn().mockResolvedValue(undefined),
   signOut: vi.fn().mockResolvedValue(undefined),
   subscribeToPush: vi.fn().mockResolvedValue({ subscribed: true }),
