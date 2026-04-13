@@ -1,7 +1,13 @@
 self.addEventListener('install', (event) => {
+  const basePath = self.location.pathname.replace('sw.js', '')
+  
   event.waitUntil(
     caches.open('tracelog-shell-v1').then((cache) =>
-      cache.addAll(['/', '/manifest.webmanifest', '/favicon.svg']),
+      cache.addAll([
+        basePath,
+        basePath + 'manifest.webmanifest',
+        basePath + 'favicon.svg'
+      ]),
     ),
   )
   self.skipWaiting()
@@ -38,7 +44,8 @@ self.addEventListener('fetch', (event) => {
         })
         .catch(async () => {
           if (event.request.mode === 'navigate') {
-            const fallback = await caches.match('/')
+            const basePath = self.location.pathname.replace('sw.js', '')
+            const fallback = await caches.match(basePath)
             if (fallback) return fallback
           }
 
@@ -51,10 +58,11 @@ self.addEventListener('fetch', (event) => {
 self.addEventListener('push', (event) => {
   const payload = event.data ? event.data.json() : {}
   const title = payload.title || 'TraceLog'
+  const basePath = self.location.pathname.replace('sw.js', '')
   const options = {
     body: payload.body || 'Gunluk ozetin hazir.',
-    icon: '/favicon.svg',
-    badge: '/favicon.svg',
+    icon: basePath + 'favicon.svg',
+    badge: basePath + 'favicon.svg',
   }
 
   event.waitUntil(self.registration.showNotification(title, options))

@@ -220,9 +220,12 @@ export async function signInWithMagicLink(email: string) {
     throw new Error('Supabase ayarlanmadığı için magic link kullanılamıyor.')
   }
 
+  // GitHub Pages üzerinde çalışırken (örn: /tracelog/), redirect linkinin doğru klasöre (base url) gitmesi gerekir.
+  const redirectUrl = window.location.origin + import.meta.env.BASE_URL
+
   const { error } = await supabase.auth.signInWithOtp({
     email,
-    options: { emailRedirectTo: window.location.origin },
+    options: { emailRedirectTo: redirectUrl },
   })
 
   if (error) throw error
