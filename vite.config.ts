@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   // GitHub repository ismi. Repo adınız "takip" değilse, bunu kendi repo adınızla (/repo-adi/) değiştirin.
-  base: '/takip/',
+  base: '/tracelog/',
   build: {
     rollupOptions: {
       output: {

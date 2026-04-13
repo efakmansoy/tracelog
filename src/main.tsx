@@ -25,7 +25,7 @@ if ('serviceWorker' in navigator) {
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/tracelog/">
       <App />
     </BrowserRouter>
   </StrictMode>,
